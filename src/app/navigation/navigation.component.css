@@ -1,0 +1,12 @@
+.collapse{
+  background: #ff8287
+}
+li{
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.username{
+  padding: .5em 5em;
+  color: #412af0;
+  font-size: 15px;
+}

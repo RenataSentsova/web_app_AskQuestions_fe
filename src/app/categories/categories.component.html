@@ -1,0 +1,49 @@
+<div class="container" *ngIf="info.token; else loggedOut">
+  <div class="row" style="margin-top: 28px;" align="center">
+    <div class="col-md-5">
+      <br>
+      <div class="list-group">
+        <h1><strong>All categories</strong></h1>
+        <a *ngFor="let category of categories" (click)="selectCategory(category)"
+           class="list-group-item list-group-item-action list-group-item-secondary">
+          <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+          &nbsp;{{category.nameCategory}}
+          <a *ngIf="authority === 'admin'" href="/categories" (click)="deleteCategory(category)" class="pull-right text-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-7" >
+      <br>
+      <h1><strong>Subcategories</strong></h1>
+      <div class="row" >
+        <table *ngIf="selectedCategory != null" align="center">
+          <tr *ngFor="let subcategory of subcategories">
+            <td class="td1">
+              <a class="list-group-item-action" [routerLink]="[subcategory.id, 'questions']">
+                <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                &nbsp;{{subcategory.nameSubcat}}
+              </a>
+            </td>
+            <td *ngIf="authority === 'admin'" class="td1">
+              <a (click)="deleteSubcategory(subcategory)" class="list1 list-group-item-action text-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>

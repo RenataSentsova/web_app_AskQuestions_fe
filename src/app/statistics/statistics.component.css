@@ -1,0 +1,13 @@
+h2, h3{
+  background: white; /* Цвет фона под заголовком */
+  padding: 2px; /* Поля вокруг текста */
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+h4 {
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}

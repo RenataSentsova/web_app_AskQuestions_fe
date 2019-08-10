@@ -1,0 +1,92 @@
+<div *ngIf="info.token; else loggedOut">
+<div *ngIf="user.state=='active'; else not">
+  <br>
+  <h2><strong>User information</strong></h2>
+  <br>
+  <table align="center" width="70%" class="semiopacity">
+    <tr>
+      <td colspan="2"><h4>Name: {{user.name}}</h4></td>
+    </tr>
+    <tr>
+      <td colspan="2"><h4>Login: {{user.login}}</h4></td>
+    </tr>
+    <tr>
+      <td>
+        <h3><small>Questions asked:</small></h3>
+        <h4><strong>{{user.nbQuestions}}</strong></h4>
+      </td>
+      <td>
+        <h3><small>Answers are given:</small></h3>
+        <h4><strong>{{user.nbAnswers}}</strong></h4>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <h2><strong>User Questions</strong></h2>
+
+  <div>
+    <table class="table table-striped" [mfData]="questions" #mf="mfDataTable" [mfRowsOnPage]="3" >
+      <thead>
+      <tr bgcolor="white">
+        <th style="width: 20%">
+
+        </th>
+        <th style="width: 60%" bgcolor="#fafad2">
+            <h4><strong> Question </strong></h4>
+        </th>
+        <th style="width: 20%">
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let question of mf.data" >
+        <td bgcolor="white">
+          <em class="em1">Date of creation: {{question.modifiedOn}}</em>
+        </td>
+        <td bgcolor="#fafad2">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <span class="span1">{{question.topic}}</span>
+        </td>
+        <td bgcolor="white">
+          <a href="#" class="knopka" [routerLink]="[question.id]">
+            Go to the question
+          </a>
+          <br>
+          <br>
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+          {{question.nbAnswers}}
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="3">
+          <mfBootstrapPaginator [rowsOnPageSet]="[3,6,12]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</div>
+
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+
+<ng-template #not>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>The user has been deleted from the system</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>

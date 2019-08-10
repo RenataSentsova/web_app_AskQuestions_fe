@@ -1,0 +1,113 @@
+<!--<body>-->
+<div class="container" *ngIf="info.token; else loggedOut">
+  <div *ngIf="authority != 'admin'" >
+  <div *ngIf="isAsked; else askForm">
+    <span style="color: red; font-size: 20px;">You have successfully added a question</span>
+    <br>
+    <a href="/ask" style="font-size: 20px">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      <strong>Ask another question</strong>
+    </a>
+  </div>
+  <ng-template #askForm>
+    <div>
+      <br>
+      <h2><strong>Ask your question</strong></h2>
+      <br>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              <div class="form-group">
+                <label for="topic">
+                  Topic of your question <em>*</em>
+                </label>
+                <textarea type="text" class="form-control" name="topic" [(ngModel)]="form.topic" #name="ngModel" required minlength="10" maxlength="255">
+                </textarea>
+                <div *ngIf="f.submitted && name.invalid">
+                  <div *ngIf="name.errors.required">
+                    <span style="color: red"><strong>Required</strong></span>
+                  </div>
+                  <div *ngIf="name.errors.minlength">
+                    <span style="color: red">
+                      <strong>The topic of the question must be at least 10 characters.</strong>
+                    </span>
+                  </div>
+                  <div *ngIf="name.errors.maxlength">
+                    <span style="color: red">
+                      <strong>The topic of the question must not exceed 255 characters.</strong>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="text">Content of your question <em>*</em> </label>
+                <textarea type="text" class="form-control" name="text" [(ngModel)]="form.text" #text="ngModel"
+                       required maxlength="1000">
+
+                </textarea>
+                <div *ngIf="f.submitted && text.invalid">
+                  <div *ngIf="text.errors.required">
+                    <span style="color: red"><strong>Required</strong></span>
+                  </div>
+                  <div *ngIf="text.errors.maxlength">
+                    <span style="color: red"><strong>Content must be no more than 1000 characters.</strong></span>
+                  </div>
+                </div>
+              </div>
+
+          <div class="row" style="margin-top: 28px;" align="center">
+            <div class="col-md-5">
+              <br>
+              <div class="list-group">
+                <label>Select a category of your question <em>*</em> </label>
+                <a *ngFor="let category of categories" (click)="selectCategory(category)"
+                   class="list-group-item list-group-item-action list-group-item-secondary">
+                  <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                  &nbsp;{{category.nameCategory}}
+                </a>
+                <div *ngIf="f.submitted && selectedCategory==null">
+                  <span style="color: red"><strong>Required</strong></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7" >
+              <div class="list-group">
+                <label>Select subcategory of your question <em>*</em> </label>
+                <p *ngIf="selectedCategory != null">
+                  <a *ngFor="let subcategory of subcategories" (click)="selectSubcategory(subcategory)"
+                     class="list-group-item list-group-item-action list-group-item-info">
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    &nbsp;{{subcategory.nameSubcat}}
+                  </a>
+                  <span style="color: #412af0"><strong>Selected subcategory:</strong> {{selectedSubcategory.nameSubcat}}</span>
+                </p>
+                <div *ngIf="f.submitted && selectedSubcategory==null">
+                  <span style="color: red"><strong>Required</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+              <div class="form-group" align="center">
+                <button class="knopka">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Add question
+                </button>
+                <div *ngIf="f.submitted && isAskFailed" class="alert alert-warning">
+                  <span style="color: red; font-size: 20px"><strong>Error adding question</strong></span>
+                     <br/>{{errorMessage}}
+                </div>
+              </div>
+        </form>
+    </div>
+  </ng-template>
+</div>
+</div>
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+<!--</body>-->
+

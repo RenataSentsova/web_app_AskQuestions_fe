@@ -1,0 +1,36 @@
+label{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.list-group{
+  max-height: 400px;
+  /*margin-bottom: 10px;*/
+  overflow:scroll;
+  -webkit-overflow-scrolling: touch;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+em{
+  color: red;
+}
+
+h2, h3{
+  background: #ff8287;
+  padding: 2px;
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+.knopka {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background:  #c9253e;
+  padding: .7em 1.5em;
+  outline: none;
+}
+.knopka:hover { background: rgb(232,95,76); }
+.knopka:active { background: rgb(152,15,0); }

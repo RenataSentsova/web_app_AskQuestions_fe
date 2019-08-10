@@ -1,0 +1,24 @@
+h3{
+  background: #ffc392;
+  padding: 2px;
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+label{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.knopka {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background:  #c9253e;
+  padding: .7em 1.5em;
+  outline: none;
+}
+.knopka:hover { background: rgb(232,95,76); }
+.knopka:active { background: rgb(152,15,0); }
+

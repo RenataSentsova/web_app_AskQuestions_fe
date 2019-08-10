@@ -1,0 +1,46 @@
+h2, h3{
+  font-family: monospace;
+  text-align: center;
+}
+
+.mydata{
+  font-family: monospace;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  background: white;
+}
+
+h4 {
+  background: white;
+  padding: 1px;
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+.knopka {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background:  #c9253e;
+  padding: .7em 1.5em;
+  outline: none;
+}
+.knopka:hover { background: rgb(232,95,76); }
+.knopka:active { background: rgb(152,15,0); }
+
+.semiopacity {
+  background: #c9253e;
+  opacity: 0.8;
+  filter: alpha(Opacity=70);
+  color: black;
+}
+.knopka1 {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background: #48c94f;
+  padding: .7em 1.5em;
+  outline: none;
+}

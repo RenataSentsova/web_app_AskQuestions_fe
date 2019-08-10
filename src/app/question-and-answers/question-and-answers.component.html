@@ -1,0 +1,111 @@
+<div class="container" *ngIf="info.token; else loggedOut">
+  <br>
+      <h2><strong>Question</strong></h2>
+  <hr>
+
+  <div>
+    <table class="table1">
+      <tr class="tr1" >
+        <td colspan="2"><b>{{question?.topic}}</b></td>
+      </tr>
+      <tr class="tr2">
+        <td colspan="2">{{question?.text}}</td>
+      </tr>
+      <tr class="tr3">
+        <td>
+          <em class="em1">Question asked:</em>
+          <a class="a1" *ngIf="info.username==getLogin(question.userId)">
+            {{getLogin(question?.userId)}}
+          </a>
+          <a style="font-size: 15px; color: black" *ngIf="info.username!=getLogin(question.userId)" [href]="'/profile/'+[question.userId]">
+            &nbsp;{{getLogin(question?.userId)}}
+          </a>
+        </td>
+        <td>
+          <em class="em1">Date of creation: </em> {{question?.modifiedOn}}
+        </td>
+      </tr>
+    </table>
+    <br>
+    <p align="right" *ngIf="userId!=question.userId && question?.isClosed=='false' && authority != 'admin'">
+      <a [routerLink]="['addAnswer']" class="knopka">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add Answer
+      </a>
+    </p>
+      <h2 class="hh" *ngIf="question?.isClosed=='true'">
+        <strong>THE QUESTION IS CLOSED</strong>
+      </h2>
+  </div>
+
+  <h3> Answers: </h3>
+
+
+  <p *ngIf="answers.length == 0" align="center">
+    <span style="color: #ff151f; font-size: 22px; font-family: monospace; font-weight: bold; background: #ff8287;">
+      No one has answered
+    </span>
+  </p>
+
+  <div *ngIf="answers.length != 0">
+    <table class="table table-striped" [mfData]="answers" #mf="mfDataTable" [mfRowsOnPage]="3">
+      <thead>
+      </thead>
+      <tbody>
+      <tr *ngFor="let answer of mf.data">
+        <td bgcolor="#fafad2">
+          <i class="fa fa-user-circle" aria-hidden="true"></i>
+          <a style="font-size: 20px" [href]="'/profile/'+[answer.userId]">&nbsp;
+            {{getLogin(answer.userId)}}</a>
+          <br>
+          <em class="em1">Date of creation: {{answer.modifiedOn}}</em>
+        </td>
+        <td *ngIf="answer.isBest=='true'" bgcolor="#90ee90">
+          {{answer.text}}
+          <p align="center">
+            <span style="color: green">
+              Best answer
+            </span>
+          </p>
+          <hr>
+        </td>
+        <td *ngIf="answer.isBest=='false'" bgcolor="white">
+          {{answer.text}}
+          <hr>
+        </td>
+        <td *ngIf="userId==question.userId && bestAnswerId==null" bgcolor="white">
+          <a (click)="makeBest(answer)" class="aBest">
+            Best
+          </a>
+        </td>
+        <td *ngIf="userId==question.userId &&  bestAnswerId==answer.id" bgcolor="white">
+          <a (click)="makeBest(answer)" class="aBest">
+            Best
+          </a>
+        </td>
+        <td *ngIf="authority === 'admin' || userId==answer.userId && question?.isClosed=='false'" bgcolor="white">
+          <a (click)="deleteAnswer(answer)" class="pull-right text-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2">
+          <mfBootstrapPaginator [rowsOnPageSet]="[3,6,12]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>

@@ -1,0 +1,72 @@
+<body>
+<div class="container" *ngIf="info.token; else loggedOut">
+  <div *ngIf="authority == 'admin'" >
+    <div *ngIf="isAdded; else addForm">
+      <span style="color: red; font-size: 20px;">You have successfully added a subcategory</span>
+      <br>
+      <a href="/addSubcategory" style="font-size: 20px"><strong>Add another subcategory</strong></a>
+    </div>
+    <ng-template #addForm>
+      <div>
+        <br>
+        <h2><strong>Adding a Subcategory</strong></h2>
+        <br>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="name">Subcategory Name</label>
+            <textarea type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required minlength="3" maxlength="100">
+
+            </textarea>
+            <div *ngIf="f.submitted && name.invalid">
+              <div *ngIf="name.errors.required">
+                <span style="color: red"><strong>Required</strong></span>
+              </div>
+              <div *ngIf="name.errors.minlength">
+                <span style="color: red"><strong>The name must be at least 3 characters</strong></span>
+              </div>
+              <div *ngIf="name.errors.maxlength">
+                <span style="color: red"><strong>The name must be no more than 100 characters</strong></span>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 28px;" align="center">
+            <div class="col-md-5">
+              <br>
+              <div class="list-group">
+                <label>Category</label>
+                <a *ngFor="let category of categories" (click)="selectCategory(category)"
+                   class="list-group-item list-group-item-action list-group-item-secondary">
+                  <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                  &nbsp;{{category.nameCategory}}
+                </a>
+                <span style="color: #412af0"><strong>Selected Subcategory:</strong> {{selectedCategory.nameCategory}}</span>
+                <div *ngIf="f.submitted && selectedCategory==null">
+                  <span style="color: red"><strong>Required</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" align="center">
+            <button class="knopka">Add subcategory</button>
+            <div *ngIf="f.submitted && isAddFailed" class="alert alert-warning">
+              <span style="color: red; font-size: 20px"><strong>Error adding subcategory</strong></span>
+              <br/>{{errorMessage}}
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+</body>
+
+

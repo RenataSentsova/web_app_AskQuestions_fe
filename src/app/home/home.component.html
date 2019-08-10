@@ -1,0 +1,112 @@
+<div *ngIf="info.token; else loggedOut">
+  <br>
+  <h2 class="mydata">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    &nbsp;
+    <strong>Profile</strong>
+    &nbsp;
+    <i class="fa fa-user" aria-hidden="true"></i>
+  </h2>
+  <br>
+  <table align="center" width="70%" class="semiopacity">
+    <tr>
+      <td colspan="2"><h2>{{getName(info.username)}}</h2></td>
+    </tr>
+    <tr>
+      <td colspan="2"><h4>Login: {{info.username}}</h4></td>
+    </tr>
+    <tr>
+      <td colspan="2"><h4>Email: {{getEmail(info.username)}}</h4></td>
+    </tr>
+    <tr *ngIf="authority != 'admin'">
+      <td>
+        <h3><strong>{{getNbQuestions(info.username)}}</strong></h3>
+        <h4>Number of my questions</h4>
+      </td>
+      <td>
+        <h3><strong>{{getNbAnswers(info.username)}}</strong></h3>
+        <h4>Number of my answers</h4>
+      </td>
+    </tr>
+    <tr *ngIf="authority === 'admin'">
+      <td colspan="2">
+        <h2><strong>ADMINISTRATOR</strong></h2>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <p align="center">
+    <button class="knopka" (click)="logout()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+      Logout </button>
+  </p>
+
+  <p align="right">
+    <button class="knopka1" (click)="delete(info.username)">
+      <i class="fa fa-user-times" aria-hidden="true"></i>
+      Remove me from the system </button>
+  </p>
+
+  <p *ngIf="authority != 'admin'" align="center">
+    <button class="knopka" (click)="getUserId(info.username)">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      Show list of my questions </button>
+  </p>
+<div *ngIf="authority != 'admin'">
+  <table class="table table-striped" [mfData]="questions" #mf="mfDataTable" [mfRowsOnPage]="3" >
+    <thead>
+    <tr bgcolor="white">
+      <th style="width: 20%">
+
+      </th>
+      <th style="width: 60%" bgcolor="#fafad2">
+          <h4><strong>My questions</strong></h4>
+      </th>
+      <th style="width: 20%">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of mf.data" >
+      <td bgcolor="white">
+        <em class="em1">Date of creation: {{question.modifiedOn}}</em>
+      </td>
+      <td bgcolor="#fafad2">
+        <i class="fa fa-question-circle" aria-hidden="true"></i>
+        <span class="span1">{{question.topic}}</span>
+      </td>
+      <td bgcolor="white">
+        <a href="#" class="knopka" [routerLink]="[question.id]">
+          Go to the question
+        </a>
+        <br>
+        <br>
+        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+        {{question.nbAnswers}}
+        <a *ngIf="userId==question.userId" (click)="deleteQuestion(question)" class="pull-right text-danger">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3">
+        <mfBootstrapPaginator [rowsOnPageSet]="[3,6,12]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+
+</div>
+
+<ng-template #loggedOut>
+  <table align="center">
+  <tr bgcolor="white">
+    <td >
+      <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+    </td>
+  </tr>
+</table>
+</ng-template>

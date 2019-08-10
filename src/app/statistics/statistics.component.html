@@ -1,0 +1,57 @@
+<body>
+<div class="container" *ngIf="info.token; else loggedOut">
+  <h2><strong>Статистика в цифрах</strong></h2>
+  <table class="table table-striped">
+    <tr>
+      <td>
+        <h3>Категорий на сайте:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4><strong>{{this.categoriesCount}}</strong></h4>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3>Подкатегорий на сайте:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4><strong>{{this.subcategoriesCount}}</strong></h4>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3>Вопросов на сайте:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4><strong>{{this.questionsCount}}</strong></h4>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3>Ответов на сайте:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4><strong>{{this.answersCount}}</strong></h4>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Пожалуйста, войдите в систему</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+</body>

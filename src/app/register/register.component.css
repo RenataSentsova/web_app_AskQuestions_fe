@@ -1,0 +1,17 @@
+label{
+  font-size: 22px;
+  font-weight: bold;
+}
+
+em{
+  color: red;
+}
+
+.knopka {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background:  #c9253e;
+  padding: .7em 1.5em;
+  outline: none;
+}

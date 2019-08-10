@@ -1,0 +1,70 @@
+<div class="container" *ngIf="info.token; else loggedOut">
+  <br>
+  <h2><strong>Adding an answer to the question:</strong></h2>
+  <div>
+    <table class="table1">
+      <tr class="tr1" >
+        <td><b>{{question?.topic}}</b></td>
+      </tr>
+      <tr class="tr2">
+        <td>{{question?.text}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <h2><strong>Your Answer:</strong></h2>
+  <div *ngIf="isAdded; else addForm">
+    <span style="font-size: 20px">You have successfully added a response.</span>
+    <br>
+    <a href="javascript:history.back()" style="font-size: 20px">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      Back to question
+    </a>
+  </div>
+
+  <ng-template #addForm>
+    <div>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label style="font-size: 20px" for="text">Text <em>*</em> </label>
+          <textarea type="text" class="form-control" name="text" [(ngModel)]="form.text" #text="ngModel" required minlength="2" maxlength="255">
+          </textarea>
+          <div *ngIf="f.submitted && text.invalid">
+            <div *ngIf="text.errors.required">
+              <span style="color: red">
+                <strong>Required</strong>
+              </span>
+            </div>
+            <div *ngIf="text.errors.minlength">
+              <span style="color: red">
+                <strong>Text must be at least 2 characters!</strong>
+              </span>
+            </div>
+            <div *ngIf="text.errors.maxlength">
+              <span style="color: red">
+                <strong>Text must not exceed 255 characters.</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="knopka">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add answer
+          </button>
+          <div *ngIf="f.submitted && isAddFailed" class="alert alert-warning">
+            <span style="color: red">
+              <strong>Error adding response</strong>
+            </span>
+            <br/>{{errorMessage}}
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</div>
+<ng-template #loggedOut>
+  <span style="color: red; font-size: 20px">
+    <strong>Please login</strong>
+  </span>
+</ng-template>

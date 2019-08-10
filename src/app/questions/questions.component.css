@@ -1,0 +1,43 @@
+h2, h3{
+  background: white;
+  padding: 2px;
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+h4 {
+  font-family: monospace;
+  color: #5c2e0d;
+  text-align: center;
+}
+
+.em1{
+  color: saddlebrown;
+  text-align: left;
+  font-size: 10px;
+}
+
+.a1{
+  color: saddlebrown;
+  font-size: 17px;
+}
+
+.span1{
+  color: saddlebrown;
+  font-size: 18px;
+}
+a{
+  cursor: pointer;
+}
+
+.knopka {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  background:  #c9253e;
+  padding: .7em 1.5em;
+  outline: none;
+}
+.knopka:hover { background: rgb(232,95,76); }
+.knopka:active { background: rgb(152,15,0); }

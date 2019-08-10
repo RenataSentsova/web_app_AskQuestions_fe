@@ -1,0 +1,80 @@
+<div class="container" *ngIf="info.token; else loggedOut">
+  <br>
+  <h2><strong>Questions</strong></h2>
+  <h3> Topic: {{nameSubcat}}</h3>
+
+  <table class="table table-striped" [mfData]="questions" #mf="mfDataTable" [mfRowsOnPage]="4" >
+    <thead>
+    <tr bgcolor="white">
+      <th style="width: 20%">
+        <mfDefaultSorter by="modifiedOn">
+          <h4>
+            <strong>Question asked: </strong>
+          </h4>
+        </mfDefaultSorter>
+      </th>
+      <th style="width: 60%" bgcolor="#fafad2">
+        <mfDefaultSorter by="topic">
+          <h4>
+            <strong>Topic of question: </strong>
+          </h4>
+        </mfDefaultSorter>
+      </th>
+      <th style="width: 20%">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of mf.data" >
+      <td bgcolor="white">
+        <p *ngIf="info.username==getLogin(question.userId)" style="color: green">
+          <strong>YOUR QUESTION</strong>
+        </p>
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        <a class="a1" *ngIf="info.username==getLogin(question.userId)">
+          {{getLogin(question.userId)}}
+        </a>
+        <a class="a1" *ngIf="info.username!=getLogin(question.userId)" [href]="'/profile/'+[question.userId]">&nbsp;
+          {{getLogin(question.userId)}}
+        </a>
+        <br>
+        <em class="em1">Date of creation: {{question.modifiedOn}}</em>
+      </td>
+      <td bgcolor="#fafad2">
+        <i class="fa fa-question-circle" aria-hidden="true"></i>
+        <span class="span1">{{question.topic}}</span>
+      </td>
+      <td bgcolor="white">
+        <a href="#" class="knopka" [routerLink]="[question.id]">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          Go to the question
+        </a>
+        <br>
+        <br>
+        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+        {{question.nbAnswers}}
+        <a *ngIf="authority === 'admin' || userId==question.userId" (click)="deleteQuestion(question)" class="pull-right text-danger">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3">
+        <mfBootstrapPaginator [rowsOnPageSet]="[4,8,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<ng-template #loggedOut>
+  <table align="center">
+    <tr bgcolor="white">
+      <td >
+        <span style="color: red; font-size: 20px"><strong>Please login</strong></span>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+
