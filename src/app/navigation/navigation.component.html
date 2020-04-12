@@ -9,7 +9,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       &nbsp;
-      <li *ngIf="authority" class="nav-item active">
+      <li *ngIf="authority" class="nav-item active" id="cats">
         <a class="nav-link" href="#" routerLink="/categories">
           <i class="fa fa-list" aria-hidden="true"></i>
           Categories
@@ -17,7 +17,7 @@
         </a>
       </li>
       &nbsp;
-      <li *ngIf="authority === 'user'" class="nav-item">
+      <li *ngIf="authority === 'user'" class="nav-item" id="ask">
         <a class="nav-link" href="#" routerLink="/ask">
           <i class="fa fa-question-circle" aria-hidden="true"></i>
           Ask
@@ -33,15 +33,16 @@
           <i class="fa fa-plus" aria-hidden="true"></i>
           Add subcategory</a>
       </li>
-      &nbsp;
-      <li *ngIf="authority" class="nav-item">
+      <li *ngIf="authority" class="nav-item" id="home">
         <a class="nav-link" routerLink="home">
           <i class="fa fa-home" aria-hidden="true"></i>
           Home
         </a>
       </li>
       <li *ngIf="!authority" class="nav-item">
-        <a class="nav-link" routerLink="auth/login">Login</a>
+        <a class="nav-link" routerLink="auth/login">
+          Login
+        </a>
       </li>
       <li *ngIf="authority === 'user'" class="username">
         <span><strong> You are logged in as: {{tokenStorage.getUsername()}}</strong></span>

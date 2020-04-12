@@ -13,13 +13,15 @@
   </div>
   <br>
   <h2><strong>Your Answer:</strong></h2>
-  <div *ngIf="isAdded; else addForm">
-    <span style="font-size: 20px">You have successfully added a response.</span>
-    <br>
-    <a href="javascript:history.back()" style="font-size: 20px">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-      Back to question
-    </a>
+  <div>
+    <div *ngIf="isAdded; else addForm">
+      <span style="font-size: 20px">You have successfully added a response.</span>
+      <br>
+      <a href="javascript:history.back()" style="font-size: 20px" id="back">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Back to question
+      </a>
+    </div>
   </div>
 
   <ng-template #addForm>

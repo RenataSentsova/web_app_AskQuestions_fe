@@ -43,13 +43,13 @@ export class AddAnswerComponent implements OnInit {
     }
   }
 
-  public getQuestion(){
+  public getQuestion() {
     this.questionService.findOne(this.questionId).subscribe(
       res => {
         this.question = res;
       },
-      err => {alert("Error loading question")}
-    )
+      err => {alert("Error loading question");}
+    );
   }
   public getUserId(){
     this.userService.getUserIdByUserName(this.info.username).subscribe(
@@ -57,7 +57,7 @@ export class AddAnswerComponent implements OnInit {
         this.userId = res;
       },
       err => {
-        alert("Error loading categories")
+        alert("Error loading categories");
       });
   }
 

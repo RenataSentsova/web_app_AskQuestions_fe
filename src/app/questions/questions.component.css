@@ -32,6 +32,7 @@ a{
 }
 
 .knopka {
+  font-size: 15px;
   color: #fff;
   text-decoration: none;
   user-select: none;
